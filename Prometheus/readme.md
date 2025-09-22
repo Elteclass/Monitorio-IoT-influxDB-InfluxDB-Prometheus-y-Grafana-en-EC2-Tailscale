@@ -39,3 +39,9 @@ Para la prueba final, se accedió a la interfaz web de Prometheus a través de l
 
 <img width="1593" height="493" alt="image" src="https://github.com/user-attachments/assets/70a6a567-e8d3-4478-bf33-2ebd88f1956a" />
 
+---
+
+**Autor**: Jaime Antonio Alvarez Crisostomo  
+**Institución**: TECNM / Instituto Tecnológico de Tijuana  
+**Materia**: Sistemas Programables  
+**Año**: 2025
