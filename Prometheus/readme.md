@@ -27,7 +27,7 @@ La instalación a través de apt genera automáticamente un archivo de configura
 
 <img width="1586" height="588" alt="image" src="https://github.com/user-attachments/assets/c01cd6f1-3f4a-4a4d-a49c-a0d85a44ed78" />
 
-## 3.4 Acceso a la Interfaz Web y Consulta
+## 2.4 Acceso a la Interfaz Web y Consulta
 Para la prueba final, se accedió a la interfaz web de Prometheus a través de la IP pública de la instancia EC2.
 
 <img width="347" height="34" alt="image" src="https://github.com/user-attachments/assets/0969c32b-9b74-4d19-ad59-a904768f6186" />
