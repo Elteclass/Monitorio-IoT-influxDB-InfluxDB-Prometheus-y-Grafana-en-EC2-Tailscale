@@ -28,13 +28,15 @@ La documentación se organiza en carpetas para facilitar la lectura y seguimient
 
 ---
 
-## 🛠️ Desarrollo de la Práctica (Según Rúbrica)  
+## 🛠️ Desarrollo de la Práctica  
 
 ### 1. Configuración de Tailscale (20%)  
 Se configuró una **VPN con Tailscale** para interconectar de forma segura la instancia EC2 y los dispositivos personales.  
 Esto eliminó la necesidad de exponer puertos públicos, aumentando la seguridad.  
 
-📎 Evidencia: *Captura del panel de administración de Tailscale*.  
+📎 Evidencia: *Captura del panel de administración de Tailscale*. 
+
+<img width="1144" height="622" alt="Captura de pantalla 2025-09-21 132427" src="https://github.com/user-attachments/assets/9608c502-6b5d-47aa-b52f-23252a18257e" />
 
 ---
 
@@ -42,7 +44,7 @@ Esto eliminó la necesidad de exponer puertos públicos, aumentando la seguridad
 - Instalación desde repositorio oficial.  
 - Creación de **organización**, **bucket** y **token** de autenticación.  
 
-📄 [Ver Pasos de Instalación de InfluxDB](./InfluxDB/README.md)  
+📄 [Ver Pasos de Instalación de InfluxDB](./influxDB/readme.md)  
 
 ---
 
@@ -50,7 +52,7 @@ Esto eliminó la necesidad de exponer puertos públicos, aumentando la seguridad
 - Servicios configurados con **systemd**.  
 - Archivo `prometheus.yml` actualizado para monitoreo de endpoints.  
 
-📄 [Ver Pasos de Instalación de Prometheus](./Prometheus/README.md)  
+📄 [Ver Pasos de Instalación de Prometheus](./Prometheus/readme.md)  
 
 ---
 
@@ -58,14 +60,56 @@ Esto eliminó la necesidad de exponer puertos públicos, aumentando la seguridad
 - Instalación y habilitación del servicio.  
 - Configuración de **data sources**: InfluxDB y Prometheus.  
 
-📄 [Ver Pasos de Instalación de Grafana](./Grafana/README.md)  
+📄 [Ver Pasos de Instalación de Grafana](./Grafana/readme.md)  
 
 ---
 
 ### 5. Simulación de Datos IoT (15%)  
 Se desarrolló un script en **Python** que simula un sensor de **temperatura y humedad**, enviando datos a InfluxDB cada 5 segundos.  
 
-🐍 [Ver Script de Simulación](./simulador/simulador.py)  
+🐍 CODIGO
+```python
+from datetime import datetime
+import random
+import time
+from influxdb_client import InfluxDBClient, Point, WritePrecision
+from influxdb_client.client.write_api import SYNCHRONOUS
+
+# --- CONFIGURACIÓN REAL ---
+token = "###########################################################################################"
+org = "SistemasProgramables"
+bucket = "datos"
+
+# Inicializar cliente InfluxDB
+client = InfluxDBClient(url="http://localhost:8086", token=token, org=org)
+write_api = client.write_api(write_options=SYNCHRONOUS)
+
+print("--- Simulador IoT iniciado ---")
+
+try:
+    while True:
+        temperatura = round(random.uniform(18.0, 30.0), 2)
+        humedad = round(random.uniform(40.0, 70.0), 2)
+
+        punto = (
+            Point("ambiente")
+            .tag("ubicacion", "laboratorio")
+            .field("temperatura", temperatura)
+            .field("humedad", humedad)
+            .time(datetime.utcnow(), WritePrecision.NS)
+        )
+
+        write_api.write(bucket=bucket, record=punto)
+        print(f"Enviado: temperatura={temperatura}°C, humedad={humedad}%")
+        time.sleep(5)
+
+except KeyboardInterrupt:
+    print("\n--- Simulador detenido ---")
+except Exception as e:
+    print(f"Error: {e}")
+
+
+```
 
 ---
 
@@ -76,6 +120,8 @@ Dashboard unificado que integra:
 - **Métricas de sistema** desde Prometheus/Node Exporter.  
 
 📊 Resultado Final: *Captura del dashboard en Grafana*.  
+
+
 
 ---
 
