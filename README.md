@@ -119,9 +119,9 @@ Dashboard unificado que integra:
 - **Métricas IoT** desde InfluxDB.  
 - **Métricas de sistema** desde Prometheus/Node Exporter.  
 
-📊 Resultado Final: *Captura del dashboard en Grafana*.  
+📊 Resultado Final: [*Video en Loom*](https://www.loom.com/share/2f9d0307be9d4ea7b488d60c17fb3e08?sid=41ae345f-8d33-4095-be7b-63f08e7cf57b).  
 
-
+<img width="1588" height="770" alt="image" src="https://github.com/user-attachments/assets/2e11b852-2e04-49f9-9683-273ee04c0afe" />
 
 ---
 
